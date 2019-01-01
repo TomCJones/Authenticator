@@ -14,6 +14,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Authenticator;
+using System.ComponentModel;
 
 namespace Authenticator.UWP
 {
@@ -30,6 +32,29 @@ namespace Authenticator.UWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+        }
+
+        string uriRequest = "Awaiting a request";
+
+        public event PropertyChangedEventHandler UriChanged;
+
+        public string UriRequest
+        {
+            set
+            {
+                if (uriRequest != value)
+                {
+                    uriRequest = value;
+                    if (UriChanged != null)
+                    {
+                        UriChanged(this, new PropertyChangedEventArgs("UriChanged"));
+                    }
+                }
+            }
+            get
+            {
+                return uriRequest;
+            }
         }
 
         /// <summary>
@@ -97,5 +122,32 @@ namespace Authenticator.UWP
             //TODO: Save application state and stop any background activity
             deferral.Complete();
         }
+
+        /// <summary>
+        /// Invoked when application is started by some other app making ah NTTP call to openid:\\
+        /// </summary>
+        /// <param name="args"></param>
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            if (args.Kind == ActivationKind.Protocol)
+            {
+                ProtocolActivatedEventArgs eventArgs = args as ProtocolActivatedEventArgs;
+                var uri = eventArgs.Uri.AbsoluteUri;
+                UriRequest = uri;
+
+                var frame = Window.Current.Content as Frame;
+
+                if (frame == null)
+                    frame = new Frame();
+                var p = frame.Content as MainPage;
+//                p.urlDisplay = 
+ //               frame.Navigate(typeof(MainPage), args);
+
+                //Ensure current windo active
+                Window.Current.Activate();
+            }
+            base.OnActivated(args);
+        }
+
     }
 }

@@ -2,13 +2,35 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Authenticator"
-             x:Class="Authenticator.MainPage">
+             x:Class="Authenticator.MainPage"
+             Title="TopCat Authenticator/Resolver"
+             BackgroundColor="Black">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+    <FlexLayout Direction="Column">
+        <!-- HEADER -->
+        <Label Text="Trust Registry Authenticator"
+               FontFamily="Garamond"
+               FontSize="Large"
+               BackgroundColor="MidnightBlue"
+               HorizontalTextAlignment="Center" />
 
+        <!-- Body -->
+        <FlexLayout FlexLayout.Grow="1"
+                    BackgroundColor="Black" >
+            <Label x:Name="urlDisplay"
+               Text ="Empty"
+               FontSize="14"
+               HorizontalOptions="Center"
+               HeightRequest="33"
+               VerticalOptions="End" />
+        </FlexLayout>
+        
+        <!-- Footer -->
+        <Label x:Name="initalDisplay"
+               Text= "empty"
+               FontSize="9"
+               HorizontalOptions="Center"
+               BackgroundColor="MidnightBlue"
+               VerticalOptions="EndAndExpand" />
+    </FlexLayout>
 </ContentPage>

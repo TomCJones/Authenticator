@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Authenticator
@@ -10,7 +11,6 @@ namespace Authenticator
         public App()
         {
             InitializeComponent();
-
             MainPage = new MainPage();
         }
 

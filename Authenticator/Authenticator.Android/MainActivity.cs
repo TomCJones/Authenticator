@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Xamarin.Essentials;
 
 namespace Authenticator.Droid
 {
@@ -19,6 +20,7 @@ namespace Authenticator.Droid
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            //Xamarin.Essentials.Platform.Init(this, savedInstanceState); // add this line to your code
             LoadApplication(new App());
         }
     }
